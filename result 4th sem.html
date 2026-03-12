@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Link Generator</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+      }
+
+      .container {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 90%;
+        max-width: 400px;
+      }
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+        margin-bottom: 15px;
+        outline: none;
+      }
+
+      input:focus {
+        border-color: #4facfe;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 8px;
+        background: #4facfe;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #2b7de9;
+      }
+
+      @media (max-width: 500px) {
+        .container {
+          padding: 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h2>Enter Text</h2>
+
+      <input
+        type="text"
+        id="userInput"
+        placeholder="রেজিস্ট্রেশন নাম্বার দিন"
+      />
+
+      <button onclick="goToLink()">Go</button>
+    </div>
+
+    <script>
+      function goToLink() {
+        let value = document.getElementById("userInput").value;
+
+        if (value.trim() == "") {
+          alert("Please enter something");
+          return;
+        }
+
+        /* এখানে তোমার কাস্টম লিংক */
+
+        let url =
+          "http://103.113.200.7/bedHon/semester_result_individual.php?roll_number=&reg_no=" +
+          encodeURIComponent(value) +
+          "&exm_code=5684&exam_year=2023";
+
+        window.location.href = url;
+      }
+    </script>
+  </body>
+</html>
