@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Link Generator</title>
+    <title>B.Ed(Honours Result)</title>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea, #764ba2);
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -17,52 +21,98 @@
       }
 
       .container {
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        width: 90%;
-        max-width: 400px;
+        background: #ffffff;
+        padding: 35px 28px;
+        border-radius: 16px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        width: 100%;
+        max-width: 420px;
+        text-align: left;
+        animation: fadeIn 0.6s ease-in-out;
       }
 
       h2 {
         margin-bottom: 20px;
+        color: #333;
+        text-align: center;
       }
 
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #444;
+        font-size: 14px;
+      }
+
+      select,
       input {
         width: 100%;
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 10px;
         border: 1px solid #ddd;
-        font-size: 16px;
+        font-size: 15px;
         margin-bottom: 15px;
         outline: none;
+        transition: all 0.3s ease;
+        background: #f9f9f9;
       }
 
+      select:focus,
       input:focus {
-        border-color: #4facfe;
+        border-color: #667eea;
+        background: #fff;
+        box-shadow: 0 0 6px rgba(102, 126, 234, 0.4);
+      }
+
+      .helper-text {
+        font-size: 13px;
+        color: #666;
+        margin-bottom: 8px;
       }
 
       button {
         width: 100%;
-        padding: 12px;
+        padding: 13px;
         border: none;
-        border-radius: 8px;
-        background: #4facfe;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
         font-size: 16px;
         cursor: pointer;
-        transition: 0.3s;
+        transition: all 0.25s ease;
+        font-weight: 600;
+        letter-spacing: 0.5px;
       }
 
       button:hover {
-        background: #2b7de9;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25);
       }
 
-      @media (max-width: 500px) {
+      button:active {
+        transform: scale(0.97);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Mobile */
+      @media (max-width: 480px) {
         .container {
-          padding: 25px;
+          padding: 25px 18px;
+        }
+
+        h2 {
+          font-size: 18px;
         }
       }
     </style>
@@ -70,32 +120,41 @@
 
   <body>
     <div class="container">
-      <h2>Enter Text</h2>
+      <h2>আপনার তথ্য দিন</h2>
 
-      <input
-        type="text"
-        id="userInput"
-        placeholder="রেজিস্ট্রেশন নাম্বার দিন"
-      />
+      <label for="exams">পরীক্ষা বাছাই করুন</label>
+      <select name="exams" id="exams">
+        <option value="5681-2022">প্রথম সেমিস্টার</option>
+        <option value="5682-2022">দ্বিতীয় সেমিস্টার</option>
+        <option value="5683-2023">তৃতীয় সেমিস্টার</option>
+        <option value="5684-2023">চতুর্থ সেমিস্টার</option>
+      </select>
 
-      <button onclick="goToLink()">Go</button>
+      <label for="userInput">রেজিস্ট্রেশন নাম্বার</label>
+
+      <input type="text" id="userInput" placeholder="এখানে টাইপ করুন" />
+
+      <button onclick="goToLink()">রেজাল্ট দেখুন</button>
     </div>
 
     <script>
       function goToLink() {
         let value = document.getElementById("userInput").value;
+        let exam = document.getElementById("exams").value.split("-")[0];
+        let year = document.getElementById("exams").value.split("-")[1];
 
         if (value.trim() == "") {
           alert("Please enter something");
           return;
         }
 
-        /* এখানে তোমার কাস্টম লিংক */
-
         let url =
           "http://103.113.200.7/bedHon/semester_result_individual.php?roll_number=&reg_no=" +
           encodeURIComponent(value) +
-          "&exm_code=5684&exam_year=2023";
+          "&exm_code=" +
+          encodeURIComponent(exam) +
+          "&exam_year=" +
+          encodeURIComponent(year);
 
         window.location.href = url;
       }
